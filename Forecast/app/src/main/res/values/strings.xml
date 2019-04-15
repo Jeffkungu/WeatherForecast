@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Forecast</string>
+    <string name="action_settings">Settings</string>
+    <string name="open_weather_key">4f1cde5084a931c9e34e2fa4153e1e52</string>
+    <string name="google_maps_key">AIzaSyC8j3cNusPdSY_MWRnTO2EhfwiUTL3RXws</string>
+    <string name="maps_error">Sorry Maps services not available.</string>
+</resources>
