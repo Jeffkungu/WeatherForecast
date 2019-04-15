@@ -4,4 +4,19 @@
     <string name="open_weather_key">4f1cde5084a931c9e34e2fa4153e1e52</string>
     <string name="google_maps_key">AIzaSyC8j3cNusPdSY_MWRnTO2EhfwiUTL3RXws</string>
     <string name="maps_error">Sorry Maps services not available.</string>
+    <string name="find_location_error">Couldn\'t find current location. Please make sure device location is turned on.</string>
+    <string name="enter_valid_location_error">Please enter valid location.</string>
+    <string name="error_fetching_locations">Error fetching location, please check the entered name.</string>
+    <string name="internet_connectivity_error">Error connecting to server, please check your internet connectivity.</string>
+    <string name="sky_conditions">Sky conditions</string>
+    <string name="weather_condition">Weather Condition</string>
+    <string name="pressure">Pressure</string>
+    <string name="humidity">Humidity</string>
+    <string name="save">Save</string>
+    <string name="wind_speed">Wind speed</string>
+    <string name="cancel">Cancel</string>
+    <string name="temperature">Temperature</string>
+    <string name="response_body_null">Sorry can\'t find weather conditions for the location.</string>
+    <string name="no_bookmarked_locations">You don\'t have bookmarked locations.</string>
+    <string name="locations_deleted">Locations successfully deleted!</string>
 </resources>

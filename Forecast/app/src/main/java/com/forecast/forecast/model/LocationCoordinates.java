@@ -8,15 +8,15 @@ import com.google.gson.annotations.SerializedName;
 
 public class LocationCoordinates {
     @SerializedName("lon")
-    public Integer longitude;
+    public Float longitude;
     @SerializedName("lat")
-    public Integer latitude;
+    public Float latitude;
 
-    public Integer getLongitude() {
+    public Float getLongitude() {
         return this.longitude;
     }
 
-    public Integer getLatitude() {
+    public Float getLatitude() {
         return this.latitude;
     }
 }

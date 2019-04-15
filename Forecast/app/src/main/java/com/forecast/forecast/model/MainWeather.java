@@ -6,7 +6,7 @@ import com.google.gson.annotations.SerializedName;
  * Created by jeffkungu on 15/04/2019.
  */
 
-class MainWeather {
+public class MainWeather {
     @SerializedName("temp")
     public Float averageTemperature;
     @SerializedName("pressure")
