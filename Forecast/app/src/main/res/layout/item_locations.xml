@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/_80sdp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <TextView
+        android:id="@+id/locationName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:text="Nairobi"
+        android:gravity="start"
+        android:textSize="@dimen/_14ssp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_marginLeft="@dimen/_10sdp"/>
+
+    <TextView
+        android:id="@+id/skyCondition"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nairobi"
+        android:gravity="start"
+        android:textSize="@dimen/_12ssp"
+        app:layout_constraintTop_toBottomOf="@id/locationName"
+        app:layout_constraintStart_toStartOf="@id/locationName"
+        android:layout_marginTop="@dimen/_5sdp"/>
+
+    <TextView
+        android:id="@+id/temerature"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nairobi"
+        android:gravity="start"
+        android:textSize="@dimen/_12ssp"
+        app:layout_constraintTop_toBottomOf="@id/skyCondition"
+        app:layout_constraintStart_toStartOf="@id/locationName"
+        android:layout_marginTop="@dimen/_5sdp"/>
+
+</android.support.constraint.ConstraintLayout>

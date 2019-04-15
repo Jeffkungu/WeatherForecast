@@ -1,20 +1,17 @@
-package com.forecast.forecast;
+package com.forecast.forecast.view;
 
 import android.Manifest;
 import android.app.Dialog;
+import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.location.Address;
-import android.location.Geocoder;
 import android.location.Location;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -24,6 +21,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.forecast.forecast.Contract;
+import com.forecast.forecast.R;
 import com.forecast.forecast.presenter.MainPresenter;
 import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -43,7 +42,7 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements Contract.MainView, View.OnClickListener, OnMapReadyCallback, TextView.OnEditorActionListener {
     private ConstraintLayout constraintWeatherInfo;
-    private FloatingActionButton fab1, fab2;
+    private FloatingActionButton fab1;
     private ImageView getWeatherImage;
     private Contract.MainViewEventlistener eventlistener;
     private boolean permissionGranted = false;
@@ -68,7 +67,6 @@ public class MainActivity extends AppCompatActivity implements Contract.MainView
     @Override
     public void initialiseViews() {
         fab1 = findViewById(R.id.fab1);
-        fab2 = findViewById(R.id.fab2);
         getWeatherImage = findViewById(R.id.getWeatherImage);
         autoCompleteSearch = findViewById(R.id.autoCompleteSearch);
         constraintWeatherInfo = findViewById(R.id.constraintWeatherInfo);
@@ -82,7 +80,6 @@ public class MainActivity extends AppCompatActivity implements Contract.MainView
         txtCancel = findViewById(R.id.txtCancel);
 
         fab1.setOnClickListener(this);
-        fab2.setOnClickListener(this);
         getWeatherImage.setOnClickListener(this);
         txtSave.setOnClickListener(this);
         txtCancel.setOnClickListener(this);
@@ -172,11 +169,9 @@ public class MainActivity extends AppCompatActivity implements Contract.MainView
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.fab1:
-                displayMessage("Floating button clicked");
-                break;
-
-            case R.id.fab2:
-                displayMessage("Floating button clicked");
+                Intent intent = new Intent(this, BookmarkedLocationsActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
                 break;
 
             case R.id.getWeatherImage:
@@ -185,6 +180,10 @@ public class MainActivity extends AppCompatActivity implements Contract.MainView
 
             case R.id.txtCancel:
                 constraintWeatherInfo.setVisibility(View.INVISIBLE);
+                break;
+
+            case R.id.txtSave:
+                eventlistener.saveWeatherDetails(autoCompleteSearch.getText().toString());
                 break;
 
             default:
@@ -239,5 +238,10 @@ public class MainActivity extends AppCompatActivity implements Contract.MainView
         txtPressureValue.setText(pressure);
         txtHumidityValue.setText(humidity);
         txtWindSpeedValue.setText(windSpeed);
+    }
+
+    @Override
+    public void closeWindow() {
+        constraintWeatherInfo.setVisibility(View.GONE);
     }
 }

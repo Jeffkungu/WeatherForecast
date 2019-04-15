@@ -12,6 +12,8 @@ import com.forecast.forecast.R;
 import com.forecast.forecast.R.string;
 import com.forecast.forecast.api.OpenWeatherApi;
 import com.forecast.forecast.api.Service;
+import com.forecast.forecast.database.WeatherRepository;
+import com.forecast.forecast.database.WeatherTable;
 import com.forecast.forecast.model.OpenWeatherResponse;
 import com.forecast.forecast.model.WeatherDetails;
 import com.google.android.gms.common.ConnectionResult;
@@ -36,10 +38,17 @@ public class MainPresenter implements Contract.MainViewEventlistener {
     private Context context;
     private Contract.MainView mainView;
     private SharedPreferences sharedPreferences;
+    private String averageTemp;
+    private String pressure;
+    private String humidity;
+    private String windSpeed;
+    private String skyConditions;
+    private WeatherRepository weatherRepository;
 
     public MainPresenter(Context context, MainView mainView) {
         this.context = context;
         this.mainView = mainView;
+        weatherRepository = new WeatherRepository(context);
 
         sharedPreferences = context.getSharedPreferences(USER_INFORMATION,
                 Context.MODE_PRIVATE);
@@ -111,6 +120,17 @@ public class MainPresenter implements Contract.MainViewEventlistener {
         }
     }
 
+    @Override
+    public void saveWeatherDetails(String locationName) {
+        if (skyConditions != null || averageTemp != null || pressure != null){
+            WeatherTable weatherTable = new WeatherTable(locationName, skyConditions, averageTemp,
+                    pressure, humidity, windSpeed);
+            weatherRepository.insertWeather(weatherTable);
+            mainView.closeWindow();
+        }
+
+    }
+
     private void getWeatherDetails(final String locationName, String latitude, String longitude) {
         String apiKey = sharedPreferences.getString(OPEN_WEATHER_KEY, null);
         Service openWeatherService = OpenWeatherApi.getClient().create(Service.class);
@@ -135,16 +155,16 @@ public class MainPresenter implements Contract.MainViewEventlistener {
     }
 
     private void displayWeatherDetails(String locationName, OpenWeatherResponse openWeatherResponse) {
-        String skyConditions = "";
+        skyConditions = "";
         if(!openWeatherResponse.getWeatherDetails().isEmpty()){
             WeatherDetails weatherDetails = openWeatherResponse.getWeatherDetails().get(0);
             skyConditions = weatherDetails.getDescription();
         }
-        String averaTemp = String.valueOf(openWeatherResponse.getMain().getAverageTemperature()) + " f";
-        String pressure = String.valueOf(openWeatherResponse.getMain().getPressure()) + " p";
-        String humidity = String.valueOf(openWeatherResponse.getMain().getHumidity()) + " gm/ml";
-        String windSpeed = String.valueOf(openWeatherResponse.getWind().getSpeed()) + " km/hr";
+        averageTemp = String.valueOf(openWeatherResponse.getMain().getAverageTemperature()) + " f";
+        pressure = String.valueOf(openWeatherResponse.getMain().getPressure()) + " p";
+        humidity = String.valueOf(openWeatherResponse.getMain().getHumidity()) + " gm/ml";
+        windSpeed = String.valueOf(openWeatherResponse.getWind().getSpeed()) + " km/hr";
 
-        mainView.displayWetherDetails(locationName, skyConditions, averaTemp, pressure, humidity, windSpeed);
+        mainView.displayWetherDetails(locationName, skyConditions, averageTemp, pressure, humidity, windSpeed);
     }
 }

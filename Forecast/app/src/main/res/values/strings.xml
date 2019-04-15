@@ -17,4 +17,6 @@
     <string name="cancel">Cancel</string>
     <string name="temperature">Temperature</string>
     <string name="response_body_null">Sorry can\'t find weather conditions for the location.</string>
+    <string name="no_bookmarked_locations">You don\'t have bookmarked locations.</string>
+    <string name="locations_deleted">Locations successfully deleted!</string>
 </resources>
